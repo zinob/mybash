@@ -24,10 +24,10 @@ what these do should be evident from the previous commands
 
 ## ifind the universal insensitive finder
 It finds things like i expect it to work.
-ifind foo  searches for *foo* in PWD 
-ifind .. foo searches for *foo* in one directory below PWD
+ifind foo  searches for *foo* in the current directory (and decendants) 
+ifind .. foo searches for *foo* in one directory above the current
 
 ## mk: Make in parent folders
 mk tries to make things upwards
 cd to parent directory untill it finds a Make file, then it runs make with the argument sent to mk
-ie mk build-all will cd .. untill it finds a file called Makefile, then it will run make build-all  or untill it hits /
+ie mk build-all will cd .. untill it finds a file called Makefile, then it will run make build-all if it hits the root-directory / it will print an error
