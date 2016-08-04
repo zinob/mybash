@@ -1,0 +1,15 @@
+#!/bin/bash
+bash -c "$1"
+sleep .5
+while inotifywait -q --excludei ".*\.swp" -e MODIFY -r . ; do
+    read -N 1 -t .3 skip
+    if [[ -n $skip ]] ; then 
+        echo "--- NOOP ---"
+        continue
+    fi
+    bash -c "$1"
+    echo -n '---- Running '$1' --------------------'
+    date
+    sleep 2
+done
+

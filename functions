@@ -1,0 +1,31 @@
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+shopt -s checkwinsize
+
+alias rg="grep -R "
+alias rank="sort| uniq -c|sort -n"
+
+mkcd() { mkdir $1;cd $1; }
+cpcd() { cp $*; cd ${*: -1:1}; }
+mvcd() { mv $*; cd ${*: -1:1}; }
+mkmvcd() { mkdir ${*: -1:1}; mv $*; cd ${*: -1:1}; }
+mkcpcd() { mkdir ${*: -1:1}; cp $*; cd ${*: -1:1}; }
+
+ifind(){ find ${2:+$1} -iname ${2:-$1} 2>/dev/null ;}
+
+mk (){
+	if [ $PWD == "/" ]; then
+		echo "FAILED :("
+	elif [ ! -f Makefile ]; then
+		pushd .. > /dev/null
+		mk $*
+		popd > /dev/null
+	else 
+		pwd
+		echo make $*
+		make $*
+	fi
+}
