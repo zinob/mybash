@@ -33,3 +33,12 @@ mk tries to make things upwards
 cd to parent directory untill it finds a Make file, then it runs make with the argument sent to mk.
 
 ie `mk build-all` will `cd ..` untill it finds a file called Makefile (or untill it hits the root-directory), then it will then run `make build-all`.
+
+## ss the Do-The-Right-Thing-With-Any-File-Or-Directory-Command
+(yes it clobbers Socket Statistics, no i never use Socket Statistics command)
+
+called ss, because it is on the home row and allso s is the first letter of my first name, narcisistic, like a baws.
+ss lists content of a directory opens a text-file in less, runs file-magic and stat on non-text-files and what ever else I might have crammed in there.
+
+## watchforchange The coninious abomination tool
+Uses the shell bindings for inotify, inotify-tools  to execute a command when ever a file in the curent directory changes
