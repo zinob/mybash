@@ -14,9 +14,9 @@ When you want to create a dir and then go to it
 ### cpcd and mvcd
 Creates a directory named after the first argument, then moves or copies all files specified in the following arguments to it, usefull when you have accidentally exploded a tar-file in the wrong spot
 
-  tar -vxf projectwithoutroot.tar
-  mkdir project
-  mvcd project project*.txt
+    tar -vxf projectwithoutroot.tar #Ooooh crap!
+    mkdir project
+    mvcd project project*.txt
 
 ### mkmvcd mkcpcd
 what these do should be evident from the previous commands
@@ -29,5 +29,7 @@ ifind .. foo searches for *foo* in one directory above the current
 
 ## mk: Make in parent folders
 mk tries to make things upwards
-cd to parent directory untill it finds a Make file, then it runs make with the argument sent to mk
-ie mk build-all will cd .. untill it finds a file called Makefile, then it will run make build-all if it hits the root-directory / it will print an error
+
+cd to parent directory untill it finds a Make file, then it runs make with the argument sent to mk.
+
+ie `mk build-all` will `cd ..` untill it finds a file called Makefile (or untill it hits the root-directory), then it will then run `make build-all`.
