@@ -29,3 +29,8 @@ mk (){
 		make $*
 	fi
 }
+
+#Because it is apparently legit to refuse DNS-requests of the ANY-type now days
+hosta() {
+   for i in A AAAA CNAME HINFO ISDN MX NS PTR SOA SPF TXT ; do host -t $i $1 ;done
+}
