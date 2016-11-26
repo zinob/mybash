@@ -5,6 +5,7 @@ fi
 
 shopt -s checkwinsize
 
+alias cx="chmod +x"
 alias rg="grep -R "
 alias rank="sort| uniq -c|sort -n"
 
@@ -15,6 +16,8 @@ mkmvcd() { mkdir ${*: -1:1}; mv $*; cd ${*: -1:1}; }
 mkcpcd() { mkdir ${*: -1:1}; cp $*; cd ${*: -1:1}; }
 
 ifind(){ find ${2:+$1} -iname ${2:-$1} 2>/dev/null ;}
+
+timestamp(){gawk '{print strftime() " : " $0}'; }
 
 mk (){
 	if [ $PWD == "/" ]; then

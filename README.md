@@ -6,6 +6,10 @@ The `functions` file is supposed to be sourced from .profile or .bash rc
 - rg Recursively Grep, just grep -R, because i use it all the time
 - rank answers the question "what is the most common line in this stream" ie `dmesg |cut -c 16- |rank`
 
+## timestamp Just how long has this execution been stuck?
+Prefix date and time to every line of output.
+`slowrunningprogram | timestamp`
+
 ## the weird cd-functions
 These are slightly dangerous functions for creating directories and lugging foles around
 ### mkcd 
@@ -42,3 +46,4 @@ ss lists content of a directory opens a text-file in less, runs file-magic and s
 
 ## watchforchange The coninious abomination tool
 Uses the shell bindings for inotify, inotify-tools  to execute a command when ever a file in the curent directory changes
+
