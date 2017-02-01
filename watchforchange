@@ -4,6 +4,7 @@ sleep .5
 while inotifywait -q --excludei ".*\.swp" -e MODIFY -r . ; do
     read -N 1 -t .3 skip
     if [[ -n $skip ]] ; then 
+        read -t .1
         echo "--- NOOP ---"
         continue
     fi
