@@ -1,7 +1,11 @@
 # The Bash Scripts i need to live
 
 ## The file functions
-The `functions` file is supposed to be sourced from .profile or .bash rc
+The `functions` file is supposed to be sourced from `.profile` or `.bashrc`
+
+### Now clobbers rm!
+The script now creates a function called rm that overrides bashs built-in function. This rm takes a BTRFS snapshot of the current mount-point if possible when ever you run rm -r something.
+
 ### The aliases rg and rank
 - rg Recursively Grep, just grep -R, because i use it all the time
 - rank answers the question "what is the most common line in this stream" ie `dmesg |cut -c 16- |rank`
@@ -46,4 +50,5 @@ ss lists content of a directory opens a text-file in less, runs file-magic and s
 
 ## watchforchange The coninious abomination tool
 Uses the shell bindings for inotify, inotify-tools  to execute a command when ever a file in the curent directory changes
+My typical use of it is to run an editor in one terminal and then `watchforchange "python3 -m unittest discover"` in another window
 
