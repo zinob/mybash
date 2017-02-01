@@ -1,6 +1,6 @@
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+	 PATH="$HOME/bin:$PATH"
 fi
 
 shopt -s checkwinsize
@@ -15,9 +15,9 @@ mvcd() { mv $*; cd ${*: -1:1}; }
 mkmvcd() { mkdir ${*: -1:1}; mv $*; cd ${*: -1:1}; }
 mkcpcd() { mkdir ${*: -1:1}; cp $*; cd ${*: -1:1}; }
 
-ifind(){ find ${2:+$1} -iname ${2:-$1} 2>/dev/null ;}
+ifind(){ find ${2:+$1} -iname "*${2:-$1}*" 2>/dev/null ;}
 
-timestamp(){gawk '{print strftime() " : " $0}'; }
+timestamp(){ gawk '{print strftime() " : " $0}'; }
 
 mk (){
 	if [ $PWD == "/" ]; then
@@ -35,5 +35,30 @@ mk (){
 
 #Because it is apparently legit to refuse DNS-requests of the ANY-type now days
 hosta() {
-   for i in A AAAA CNAME HINFO ISDN MX NS PTR SOA SPF TXT ; do host -t $i $1 ;done
+	for i in A AAAA CNAME HINFO ISDN MX NS PTR SOA SPF TXT ; do host -t $i $1 ;done
+}
+
+rm(){
+	now=$(date "+%Y-%M-%d_%T")
+	
+	mntdata=($(findmnt -T .|tail -n1))
+	mnttype=${mntdata[2]}
+	mntpath=${mntdata[0]}
+	snappath=${mntpath}_rmr_${now}
+	
+	if [[ "${@}" =~ -[a-zA-Z]*r ]] ; then
+		echo -c "WARNING rm -r detected"
+		if [[ "$mnttype" == "btrfs" ]] ; then
+			echo "snapshotthing to $snappath"
+			sudo btrfs subvolume snapshot $mntpath ${mntpath}_rmr_${now}
+		else
+			read -p "Not a btrfs system and -r detected. Continue? " -a goon
+			if [[ "$goon" != "y" ]]; then 
+				return 
+			fi
+		fi
+		/bin/rm ${@}
+	else
+		/bin/rm ${@}
+   fi
 }
